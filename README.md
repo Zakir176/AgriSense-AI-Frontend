@@ -1,39 +1,97 @@
 # AgriSense AI — Frontend
 
-![Frontend Dashboard](../Docs/assets/dashboard.jpg)
+Vue 3 + Vite frontend for **AgriSense AI** — an intelligent poultry farm management platform.
 
-Vue 3 SPA built with Vite, Tailwind CSS, and Chart.js.
+Features an offline-first PWA with Capacitor mobile support, real-time visual monitoring, audio telemetry, and comprehensive farm analytics.
+
+## Related Repository
+
+- **Backend API**: [AgriSense-AI-Backend](https://github.com/Zakir176/AgriSense-AI-Backend)
+
+## Tech Stack
+
+- **Framework**: Vue 3 (Composition API)
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Charts**: Chart.js + chartjs-plugin-zoom
+- **i18n**: vue-i18n (English + Chichewa)
+- **Offline**: IndexedDB (idb) + Service Worker (vite-plugin-pwa)
+- **Mobile**: Capacitor (Android + iOS)
+- **Testing**: Vitest + Vue Test Utils
 
 ## Quick Start
 
+### Prerequisites
+
+- Node.js 18+
+- The [AgriSense-AI-Backend](https://github.com/Zakir176/AgriSense-AI-Backend) running locally or deployed
+
+### Setup
+
 ```bash
+# 1. Install dependencies
 npm install
-npm run dev   # http://localhost:5173
+
+# 2. Configure environment
+cp .env.example .env.local
+# Edit .env.local — set VITE_API_URL to your backend
+
+# 3. Start dev server
+npm run dev
 ```
 
-Requires the backend API running on `http://localhost:8000`. See the [root README](../README.md) for full setup.
+The app will be available at `http://localhost:5173`.
 
-## Scripts
+### Build for Production
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start local dev server with HMR |
-| `npm run build` | Production bundle → `dist/` |
-| `npm run preview` | Preview the production build locally |
+```bash
+npm run build
+npm run preview  # preview the production build
+```
 
-## Key Folders
+### Mobile (Capacitor)
+
+```bash
+npm run cap:sync    # build + sync to native projects
+npx cap open android  # open in Android Studio
+npx cap open ios      # open in Xcode
+```
+
+## Environment Variables
+
+| Variable | Description | Default |
+|---|---|---|
+| `VITE_API_URL` | Backend API base URL | `http://127.0.0.1:8000/api/v1` |
+
+## Project Structure
 
 ```
 src/
-├── views/        # Page-level components (one per route)
-├── components/   # Reusable UI components
+├── App.vue              # Root component with navigation
+├── main.js              # App entry point
+├── style.css            # Global styles
+├── i18n.js              # Internationalization setup
+├── assets/              # Images, CSS animations
+├── components/          # Reusable components
+│   ├── ui/              # Design system (AgriButton, AgriCard, etc.)
+│   └── __tests__/       # Component tests
+├── composables/         # Vue composables (hooks)
+├── locales/             # Translation files (en, ny)
+├── router/              # Vue Router config
 ├── services/
-│   ├── api.js    # All fetch calls to the backend go through here
-│   └── db.js     # IndexedDB offline cache (via idb)
-└── router/       # Vue Router route definitions
+│   ├── api.js           # API client (offline-first)
+│   ├── db.js            # IndexedDB cache
+│   └── store.js         # Reactive state
+├── utils/               # Utility functions
+└── views/               # Page-level components
 ```
 
-## Environment
+## Testing
 
-The API base URL is configured in `vite.config.js` via the `proxy` setting. For production builds, set `VITE_API_BASE_URL` in your deployment environment.
+```bash
+npm run test
+```
 
+## License
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
