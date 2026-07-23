@@ -78,7 +78,7 @@ export function useSyncManager() {
     }
 
     let allSuccess = true
-    const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1'
+    const apiBase = import.meta.env.VITE_API_URL || 'https://agrisense-ai-backend-8qxl.onrender.com/api/v1'
 
     const BATCH_SIZE = 5
     for (let i = 0; i < queue.length; i += BATCH_SIZE) {
@@ -141,7 +141,7 @@ export function useSyncManager() {
 
     isSyncing.value = true
     syncProgress.value = { current: 0, total: 1 }
-    const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1'
+    const apiBase = import.meta.env.VITE_API_URL || 'https://agrisense-ai-backend-8qxl.onrender.com/api/v1'
 
     try {
       const response = await fetch(`${apiBase}${item.url}`, {

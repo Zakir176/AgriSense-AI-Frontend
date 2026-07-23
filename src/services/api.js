@@ -1,6 +1,6 @@
 import { getCachedRequest, setCachedRequest, addToSyncQueue } from './db'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1'
+const API_BASE = import.meta.env.VITE_API_URL || 'https://agrisense-ai-backend-8qxl.onrender.com/api/v1'
 
 async function request(path, options = {}) {
   const token = localStorage.getItem('agrisense_token')

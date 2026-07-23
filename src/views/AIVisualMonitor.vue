@@ -750,7 +750,13 @@ const getFileName = (pathStr) => {
 const getVideoUrl = (pathStr) => {
   if (!pathStr) return ''
   const filename = getFileName(pathStr)
-  return `http://127.0.0.1:8000/uploads/${filename}`
+  const apiUrl = import.meta.env.VITE_API_URL || 'https://agrisense-ai-backend-8qxl.onrender.com/api/v1'
+  try {
+    const origin = new URL(apiUrl, typeof window !== 'undefined' ? window.location.origin : 'https://agrisense-ai-backend-8qxl.onrender.com').origin
+    return `${origin}/uploads/${filename}`
+  } catch {
+    return `https://agrisense-ai-backend-8qxl.onrender.com/uploads/${filename}`
+  }
 }
 
 const formatDateTime = (dateStr) => {
@@ -997,14 +1003,14 @@ onMounted(() => {
 
 // ── Live Feed WebSocket Logic ──────────────────
 const getWsBaseUrl = () => {
-  const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1'
+  const apiUrl = import.meta.env.VITE_API_URL || 'https://agrisense-ai-backend-8qxl.onrender.com/api/v1'
   // Extract host from API URL and build ws:// or wss:// URL (stripping path like /api/v1)
   try {
-    const url = new URL(apiUrl, typeof window !== 'undefined' ? window.location.origin : 'http://127.0.0.1:8000')
+    const url = new URL(apiUrl, typeof window !== 'undefined' ? window.location.origin : 'https://agrisense-ai-backend-8qxl.onrender.com')
     const protocol = url.protocol === 'https:' ? 'wss:' : 'ws:'
     return `${protocol}//${url.host}`
   } catch {
-    return 'ws://127.0.0.1:8000'
+    return 'wss://agrisense-ai-backend-8qxl.onrender.com'
   }
 }
 

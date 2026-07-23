@@ -455,7 +455,7 @@ const handleLogin = async () => {
     setTimeout(() => router.push({ name: 'Dashboard' }), 800)
   } catch (err) {
     if (err.message && err.message.toLowerCase().includes('fetch')) {
-      errorMessage.value = 'Cannot reach the server. Please ensure the backend is running on port 8000.'
+      errorMessage.value = 'Cannot reach the backend server. Please check your network connection or verify the backend service.'
       error('Backend server unreachable.')
     } else {
       errorMessage.value = err.message || 'Login failed. Please check your credentials.'
@@ -479,7 +479,7 @@ const handleRegister = async () => {
     setTimeout(() => router.push({ name: 'Dashboard' }), 800)
   } catch (err) {
     if (err.message && err.message.toLowerCase().includes('fetch')) {
-      errorMessage.value = 'Cannot reach the server. Please ensure the backend is running on port 8000.'
+      errorMessage.value = 'Cannot reach the backend server. Please check your network connection or verify the backend service.'
       error('Backend server unreachable.')
     } else {
       errorMessage.value = err.message || 'Registration failed. Please try again.'
